@@ -1,0 +1,227 @@
+body {
+  background-color: #010267;
+}
+#form1 {
+  height: 100%;
+  width: 100%;
+  display: block;
+  position: relative;
+}
+#div_main_content {
+  display: block;
+  position: relative;
+}
+#div_content_encuesta {
+  height: 96%;
+  width: 96%;
+  margin-left: 2%;
+  margin-top: 2%;
+  background-color: #ffffff;
+  border-radius: 4px;
+}
+#div_encabezado {
+  width: 100%;
+  height: 6em;
+  text-align: center;
+}
+#img_logo_ak_vw {
+  display: inline-block;
+  float: left;
+  position: relative;
+  margin-left: 0px;
+  margin-top: 10px;
+}
+#img_logo_vw {
+  display: inline-block;
+  float: right;
+  position: relative;
+  margin-right: 0px;
+  margin-top: 6px;
+}
+#lbl_titulo {
+  text-align: center;
+  font-size: 26px;
+}
+label {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+}
+/******************************************/
+.div_contenedor_preguntas1 {
+  margin-bottom: 1.4em;
+  margin-left: 0.6em;
+  background-color: #E3F3DB;
+}
+.div_contenedor_preguntas2 {
+  margin-bottom: 1.4em;
+  margin-left: 0.6em;
+  background-color: #ffffff;
+}
+/*****************************************/
+#div_pregunta1 {
+  display: inline-block;
+  position: relative;
+  width: 48%;
+}
+#div_respuesta1 {
+  display: inline-block;
+  position: relative;
+  width: 48%;
+}
+#div_pregunta2 {
+  display: inline-block;
+  position: relative;
+  width: 48%;
+}
+#div_respuesta2 {
+  display: inline-block;
+  position: relative;
+  width: 48%;
+}
+#div_pregunta3 {
+  display: inline-block;
+  position: relative;
+  width: 48%;
+}
+#div_respuesta3 {
+  display: inline-block;
+  position: relative;
+  width: 48%;
+}
+#div_pregunta4 {
+  display: inline-block;
+  position: relative;
+  width: 48%;
+}
+#div_respuesta4 {
+  display: inline-block;
+  position: relative;
+  width: 48%;
+}
+#div_pregunta5 {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+#div_respuesta5 {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+#div_pregunta6 {
+  display: inline-block;
+  position: relative;
+  width: 48%;
+}
+#div_respuesta6 {
+  display: inline-block;
+  position: relative;
+  width: 48%;
+}
+#div_pregunta7 {
+  display: inline-block;
+  position: relative;
+  width: 48%;
+}
+#div_respuesta7 {
+  display: inline-block;
+  position: relative;
+  width: 48%;
+}
+#div_pregunta8 {
+  display: inline-block;
+  position: relative;
+  width: 48%;
+}
+#div_respuesta8 {
+  display: inline-block;
+  position: relative;
+  width: 48%;
+}
+#div_pregunta9 {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+#div_respuesta9 {
+  display: block;
+  position: relative;
+  width: 100%;
+}
+#ta_comentarios {
+  width: 70%;
+  height: 6em;
+  border-radius: 4px;
+}
+.div_division {
+  background-color: gray;
+  height: 1px;
+  width: 20%;
+  margin-left: 40%;
+  display: none;
+}
+/*************************************/
+#div_datos_ctes {
+  display: block;
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 4px;
+  width: 96%;
+  height: 140px;
+  margin-left: 2%;
+  margin-top: 1em;
+  margin-bottom: 2em;
+}
+#div_ctes_row1 {
+  width: 100%;
+  display: block;
+  position: inherit;
+  margin-top: 0.1em;
+  height: 2em;
+  margin-bottom: 0.6em;
+}
+#div_ctes_row2 {
+  width: 100%;
+  display: block;
+  height: 2em;
+  margin-top: 0.1em;
+  margin-bottom: 0.6em;
+}
+#div_nombre {
+  display: inline-block;
+  width: 34%;
+}
+#div_ap_paterno {
+  display: inline-block;
+  width: 30%;
+}
+#div_ap_materno {
+  display: inline-block;
+  width: 30%;
+}
+#div_email {
+  display: inline-block;
+  width: 40%;
+}
+#div_tel_casa {
+  display: inline-block;
+  width: 28%;
+}
+#div_tel_cel {
+  display: inline-block;
+  width: 28%;
+}
+.txt_field {
+  border-radius: 4px;
+  width: 62%;
+}
+#div_bttn_enviar {
+  width: 100%;
+  display: block;
+  position: absolute;
+}
+#Button1 {
+  float: right;
+  margin-right: 50%;
+}
