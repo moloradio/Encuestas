@@ -76,6 +76,25 @@
             </asp:UpdatePanel>
         </div>
     </div>
+    <div id="div_modificar_preguntas">
+        <div id="div_main_modif_preguntas">
+            <div id="div_encabezado_modif_pregunta">
+                <label id="lbl_modif_pregunta">Pregunta:</label>
+                <asp:TextBox ID="txtbox_modificar_pregunta" TextMode="MultiLine" CssClass="txtbox_modificar_pregunta" runat="server"></asp:TextBox>
+            </div>
+            <div id="div_encabezado_modif_respuesta">
+                <label id="lbl_modif_respuesta">Respuestas:</label>
+                <asp:Button ID="bttn_agregar_respuesta" runat="server" Text="Agregar Respuesta" CssClass="btn btn-primary"/>
+            </div>
+            <div id="div_modif_respuestas">
+                <asp:Panel ID="Panel3" runat="server"></asp:Panel>
+            </div>
+            <div id="div_bttn_modif_preguntas">
+                <input type="button" id="bttn_cancelar_modif_pregunta" value="Cancelar" onclick="ocultarEdicionPreguntas()" class="btn btn-danger" />
+                <asp:Button ID="bttn_guardar_pregunta" runat="server" CssClass="btn btn-info bttn_guardar_pregunta" Text="Guardar" />
+            </div>
+        </div>
+    </div>
     <div id="div_modificar_encuestas">
 
     </div>
@@ -98,6 +117,8 @@
                     <label>Nombre de la encuesta:</label>
                     <asp:TextBox ID="TextBox1" runat="server" Width="279px"></asp:TextBox>
                 </div>
+    <asp:UpdatePanel ID="UpdatePanel10" runat="server">
+            <ContentTemplate>
                 <div id="div_agencia_encuesta">
                     <label>Agencia:</label>
                     <asp:DropDownList ID="DropDownList3" runat="server" DataTextField="nombre" DataValueField="nombre">
@@ -107,6 +128,8 @@
                     <label>Tipo de encuesta:</label>
                     <asp:DropDownList ID="DropDownList1" runat="server" Width="322px" DataTextField="nombre" DataValueField="nombre"></asp:DropDownList>
                 </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
                 <div id="div_bttn_encuesta">
                     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                         <ContentTemplate>
@@ -151,39 +174,51 @@
                         </asp:UpdatePanel>
                     </div>
                 </div>
-                <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                    <div id="div-panel-edicion-encuesta">
+                        <div id="div-encabezado-edicion-encuesta">
+                        <div id="div-edit-nom-encuesta">
+                            <label>Encuesta:</label>
+                        <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                            <ContentTemplate>
+                                <asp:TextBox ID="TextBox2" CssClass="text-box-nom-encuesta" runat="server"></asp:TextBox>
+                                <asp:Button ID="Button6" runat="server" CssClass="btn btn-success bttn-edit-publicar-encuesta" Text="Publicar" />
+                            </ContentTemplate>
+                        </asp:UpdatePanel>      
+                        </div>
+                <asp:UpdatePanel ID="UpdatePanel11" runat="server">
                     <ContentTemplate>
-                        <div id="div-panel-edicion-encuesta">
-                            <div id="div-encabezado-edicion-encuesta">
-                                <div id="div-edit-nom-encuesta">
-                                    <label>Encuesta:</label>
-                                    <asp:TextBox ID="TextBox2" CssClass="text-box-nom-encuesta" runat="server"></asp:TextBox>
-                                    <asp:Button ID="Button6" runat="server" CssClass="btn btn-success bttn-edit-publicar-encuesta" Text="Publicar" />
-                                </div>
-                                <div id="div-edit-datos-encuesta">
-                                    <div id="div-dropdown-agencia">
-                                        <label>Agencia:</label>
-                                        <asp:DropDownList ID="DropDownList6" runat="server"></asp:DropDownList>
-                                    </div>
-                                    <div id="div-dropdown-tencuesta">
-                                        <label>Tipo de Encuesta:</label>
-                                        <asp:DropDownList ID="DropDownList7" runat="server"></asp:DropDownList>
-                                    </div>
-                                </div>
-                                <div id="div-edit-descripcion-encuesta">
-                                    <label id="lbl-edit-descripcion-encuesta">Descripcion:</label>
-                                    <asp:TextBox ID="TextBox3" runat="server" CssClass="texbox-edit-descripcion-encuesta" TextMode="MultiLine"></asp:TextBox>
-                                </div>
-                                <div id="div-edit-bttn-encuesta">
-                                    <asp:Button ID="Button7" runat="server" CssClass="btn btn-info bttn-guardar-edit-encuestas" Text="Guardar" />
-                                    <asp:Button ID="Button8" runat="server" CssClass="btn btn-danger bttn-borrar-edit-encuestas" Text="Eliminar" />
-                                    <input id="Button9" type="button" class="btn btn-primary bttn-add-edit-encuestas" value="Agregar Pregunta" onclick="mostraAgregarPregunta2()" />
-                                </div>
+                        <div id="div-edit-datos-encuesta">
+                            <div id="div-dropdown-agencia">
+                                <label>Agencia:</label>
+                                <asp:DropDownList ID="DropDownList6" runat="server"></asp:DropDownList>
                             </div>
-                            <asp:Panel ID="Panel1" runat="server"></asp:Panel>  
+                            <div id="div-dropdown-tencuesta">
+                                <label>Tipo de Encuesta:</label>
+                                <asp:DropDownList ID="DropDownList7" runat="server"></asp:DropDownList>
+                            </div>
                         </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
+                        <div id="div-edit-descripcion-encuesta">
+                            <label id="lbl-edit-descripcion-encuesta">Descripcion:</label>
+                            <asp:TextBox ID="TextBox3" runat="server" CssClass="texbox-edit-descripcion-encuesta" TextMode="MultiLine"></asp:TextBox>
+                        </div>
+                    <asp:UpdatePanel ID="UpdatePanel8" runat="server">
+                        <ContentTemplate>
+                        <div id="div-edit-bttn-encuesta">
+                            <asp:Button ID="Button7" runat="server" CssClass="btn btn-info bttn-guardar-edit-encuestas" Text="Guardar" />
+                            <asp:Button ID="Button8" runat="server" CssClass="btn btn-danger bttn-borrar-edit-encuestas" Text="Eliminar" />
+                            <input id="Button9" type="button" class="btn btn-primary bttn-add-edit-encuestas" value="Agregar Pregunta" onclick="mostraAgregarPregunta2()" />
+                        </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    </div>
+                <asp:UpdatePanel ID="UpdatePanel9" runat="server">
+                    <ContentTemplate>
+                        <asp:Panel ID="Panel1" runat="server"></asp:Panel>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+                </div>
             </div>
 
             <div id="div-print-encuestas">

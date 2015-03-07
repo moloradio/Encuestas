@@ -16,6 +16,9 @@ public partial class vista_adminEncuesta : System.Web.UI.Page
     private String sTPregunta;
     private String sRespuesta;
 
+    private HiddenField hIdPregunta;
+    private Button bttnEditarPregunta;
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -39,6 +42,7 @@ public partial class vista_adminEncuesta : System.Web.UI.Page
             DropDownList2.Items.Add(new ListItem(encuesta.Nombre));
             DropDownList4.Items.Add(new ListItem(encuesta.Nombre));
         }
+        botonModificar();
     }
     protected void Button1_Click1(object sender, EventArgs e)
     {
@@ -51,6 +55,15 @@ public partial class vista_adminEncuesta : System.Web.UI.Page
 
         Session["idEncuesta"] = aencuesta.getIdEncuesta();
     }
+
+    public void botonModificar() {
+        bttnEditarPregunta = new Button();
+        bttnEditarPregunta.Text = "Modificar";
+        bttnEditarPregunta.CssClass = "btn btn-info bttn-modif-pregunta";
+        bttnEditarPregunta.Click += new EventHandler(this.bttnModificarPregunta);
+        bttnEditarPregunta.OnClientClick = "mostrarEdicionPreguntas()";
+    }
+
     protected void Button3_Click(object sender, EventArgs e)
     {
         MostrarDatos datos = new MostrarDatos();
@@ -81,27 +94,38 @@ public partial class vista_adminEncuesta : System.Web.UI.Page
             }
         }
 
+        Button bttnEditarPregunta = new Button();
+        bttnEditarPregunta.Text = "Modificar";
+        bttnEditarPregunta.CssClass = "btn btn-info bttn-modif-pregunta";
+        bttnEditarPregunta.Click += bttnBorrarPregunta;
+
+       // bttnEditarPregunta.OnClientClick = "mostrarEdicionPreguntas()";
+
         preguntas = datos.mostrarPreguntasDeEncuesta(nomEncuesta);
-        String html = "<div id='div-modificacion-preguntas'>";
+        Panel1.Controls.Add(bttnEditarPregunta);
+        Panel1.Controls.Add(new LiteralControl( "<div id='div-modificacion-preguntas'>"));
 
-            for(int i=0; i<preguntas.Count; i++){
-                pregunta = preguntas.ElementAt(i);
-                html +=  "<div class='div-preguntas'>"
-                            + "<div class='div-lbl-pregunta'>"
-                            + "   <Label ID='lbl_pregunta' runat='server' Text='Label' class='lbl-modif-pregunta'>"+ pregunta.Pregunta +"</asp:Label>"
-                            + "</div>"
-                            + "<div class='div-bttn-modif'>"
-                            + "   <input type='button' ID='Button5' value='Modificar' class='btn btn-info bttn-modif-pregunta' onclick='mostrarModificarPregunta' />"
-                            + "</div>"
-                            + "<div class='div-bttn-erase'>"
-                            + "   <input type='button' ID='Button6' runat='server' value='Borrar' class='btn btn-danger bttn-erase-pregunta' OnClick='bttnBorrarPregunta' />" 
-                            + "</div>"
-                        + "</div>";
+        for(int i=0; i<preguntas.Count; i++){
+            pregunta = preguntas.ElementAt(i);
+            hIdPregunta = new HiddenField();
+            hIdPregunta.Value = pregunta.IdPreguntas+"";
+            hIdPregunta.ID = "hiddenIdPreguntas";
+            Panel1.Controls.Add(new LiteralControl("<div class='div-preguntas'>"
+                        + "<div class='div-lbl-pregunta'>"
+                        + "   <Label ID='lbl_pregunta' runat='server' Text='Label' class='lbl-modif-pregunta'>"+ pregunta.Pregunta +"</asp:Label>"
+                        + "</div>"
+                        + "<div class='div-bttn-modif'>"));
+            Panel1.Controls.Add(bttnEditarPregunta);
+            Panel1.Controls.Add(hIdPregunta);
+                        //"   <input type='button' ID='Button5' value='Modificar' class='btn btn-info bttn-modif-pregunta' onclick='mostrarEdicionPreguntas()' />"
+            Panel1.Controls.Add(new LiteralControl("</div>"
+                        + "<div class='div-bttn-erase'>"
+                        + "   <input type='button' ID='Button6' runat='server' value='Borrar' class='btn btn-danger bttn-erase-pregunta' OnClick='bttnBorrarPregunta' />" 
+                        + "</div>"
+                    + "</div>"));
             
-            }
-            html +="</div>";
-
-        Panel1.Controls.Add(new LiteralControl(html));
+        }
+        Panel1.Controls.Add(new LiteralControl("</div>"));
     }
 
     public void mostrarPreguntas(Panel panel, Object sesion, String tipoAlta) {
@@ -123,7 +147,7 @@ public partial class vista_adminEncuesta : System.Web.UI.Page
                             + "   <Label ID='lbl_pregunta' runat='server' Text='Label' class='lbl-modif-pregunta'>" + pregunta.Pregunta + "</asp:Label>"
                             + "</div>"
                             + "<div class='div-bttn-modif'>"
-                            + "   <input type='button' ID='Button5' value='Modificar' class='btn btn-info bttn-modif-pregunta' onclick='mostrarModificarPregunta' />"
+                            + "   <input type='button' ID='Button5' value='Modificar' class='btn btn-info bttn-modif-pregunta' onclick='mostrarEdicionPreguntas()' />"
                             + "</div>"
                             + "<div class='div-bttn-erase'>"
                             + "   <input type='button' ID='Button6' runat='server' value='Borrar' class='btn btn-danger bttn-erase-pregunta' OnClick='bttnBorrarPregunta' />"
@@ -148,8 +172,10 @@ public partial class vista_adminEncuesta : System.Web.UI.Page
         Button13.Text = "Cambiando";
     }
 
-    protected void bttnModificarPregunta(object sender, EventArgs e) {
-
+    protected void bttnModificarPregunta(object sender, EventArgs e)
+    {
+        Button3.Text = hIdPregunta.Value;
+        Button6.Text = "Cambiando";
     }
 
     /****************************************************/

@@ -18,6 +18,13 @@ function mostraAgregarPregunta2() {
     $("#div_cont_main_nueva_pregunta2").css("display", "block");
 }
 
+function ocultarEdicionPreguntas() {
+    $("#div_modificar_preguntas").css("display", "none");
+}
+
+function mostrarEdicionPreguntas() {
+    $("#div_modificar_preguntas").css("display", "block");
+}
 
 function mostrarEnviarEmail() {
     $("#div_bttn_send_email").css("display", "block");
