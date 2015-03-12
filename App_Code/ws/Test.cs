@@ -219,14 +219,22 @@ public class Test : System.Web.Services.WebService {
                                            +",aPaterno"
                                            +",tel_casa"
                                            +",tel_celular"
-                                           +",email)"
+                                           +",email"
+                                           +",fecha_alta"
+                                           +",activo"
+                                           +",idMunicipio"
+                                           +",idEstado)"
                                      +"VALUES"
-                                           +"('"+ nombre+"'"
-                                           +",'"+ aMaterno+"'"
-                                           +",'"+ aPaterno+"'"
-                                           +",'"+ tCasa+"'"
-                                           +",'"+ tCelular+"'"
-                                           +",'"+ email +"')";
+                                           +"('"+ nombre +"'"
+                                           +",'"+ aMaterno +"'"
+                                           +",'"+ aPaterno +"'"
+                                           +",'"+ tCasa +"'"
+                                           +",'"+ tCelular +"'"
+                                           +",'"+ email +"'"
+                                           +",GETDATE()"
+                                           +",'s'"
+                                           +",1"
+                                           +",1)";
         try
         {
             sqlcomm = new SqlCommand(consultaSql, cn);
