@@ -65,3 +65,40 @@
 #bttn-cancelar-sms {
   margin-left: 4%;
 }
+#div_tabla_clientes {
+  width: 90%;
+  margin-left: 5%;
+  background: #f9f9e0;
+  display: block;
+  margin-top: 2em;
+  position: absolute;
+}
+/*************************************/
+.div_content_opc_cte {
+  display: block;
+  background: gray;
+  margin-bottom: 1em;
+  width: 100%;
+  height: 2.4em;
+  border-radius: 4px;
+}
+.div_opc_cte {
+  display: inline-block;
+}
+.div_opc_num {
+  width: 34%;
+}
+.div_opc_tel {
+  width: 12%;
+}
+.div_opc_email {
+  width: 18%;
+}
+.div_opc_sms {
+  width: 8%;
+}
+.div_opc_mail {
+  width: 8%;
+  margin-left: 0.6em;
+}
+/***************************/

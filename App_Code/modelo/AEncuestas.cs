@@ -31,10 +31,13 @@ public class AEncuestas
         pregunta = preguntas;
     }
 
-    public void altaNomEncuesta() {
+    public void altaNomEncuesta(String idAgencia, String idTEncuesta) {
         try
         {
-            String consultaSql = "INSERT INTO Encuestas (nombre,idAgencia,idUsers,idTEncuesta) VALUES ('" + encuesta.Nombre + "',1,1,1)";
+            String sIdAgencia = "(SELECT idAgencia FROM Agencia WHERE nombre = '"+ idAgencia +"')";
+            String sIdTEncuesta = "(SELECT idTEncuesta FROM TEncuesta WHERE nombre = '"+ idTEncuesta +"')";
+            String consultaSql = "INSERT INTO Encuestas (nombre,descripcion,fecha_alta,fecha_modificacion,activo,idAgencia,idUsers,idTEncuesta)"
+                                    +"VALUES ('" + encuesta.Nombre + "','" + encuesta.Descripcion + "',GETDATE(),GETDATE(),'s'," + sIdAgencia + ",1," + sIdTEncuesta + ")";
             sqlcomm = new SqlCommand(consultaSql, cn);
             cn.Open();
             try

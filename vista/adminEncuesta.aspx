@@ -130,6 +130,10 @@
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
+                <div id="div-descripcion-encuesta-nueva">
+                    <label id="lbl-descripcion-encuesta-nueva" >Descripcion:</label>
+                    <asp:TextBox ID="TextBoxDescripcionNEncuesta" runat="server" CssClass="text-descripcion-encuesta-nueva" TextMode="MultiLine"></asp:TextBox>
+                </div>
                 <div id="div_bttn_encuesta">
                     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                         <ContentTemplate>
@@ -141,9 +145,6 @@
                     <input type="button" class="btn btn-primary" value="Agregar Pregunta" onclick="mostraAgregarPregunta()"/>
                 </div>
                 <div id="div_preguntas_encuesta">
-                    <div id="div_label_preguntas">
-                        <label id="label_preguntas">Preguntas Agregadas</label>
-                    </div>
                     <div id="div_contenedor_preguntas">
                         <asp:UpdatePanel ID="UpdatePanel6" runat="server">
                             <ContentTemplate>
@@ -160,11 +161,7 @@
                         <asp:DropDownList ID="DropDownList2" runat="server"></asp:DropDownList>
                     </div>
                     <div id="div_encabezado2">
-                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                            <ContentTemplate>
-                                <asp:Button ID="Button3" runat="server" Text="Modificar" CssClass="btn btn-info" OnClick="Button3_Click" />
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
+                        <asp:Button ID="Button3" runat="server" Text="Modificar" CssClass="btn btn-info" OnClick="Button3_Click" />
                     </div>
                     <div id="div_encabezado3">
                         <asp:UpdatePanel ID="UpdatePanel2" runat="server">
@@ -197,12 +194,12 @@
                                 <asp:DropDownList ID="DropDownList7" runat="server"></asp:DropDownList>
                             </div>
                         </div>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
                         <div id="div-edit-descripcion-encuesta">
                             <label id="lbl-edit-descripcion-encuesta">Descripcion:</label>
                             <asp:TextBox ID="TextBox3" runat="server" CssClass="texbox-edit-descripcion-encuesta" TextMode="MultiLine"></asp:TextBox>
                         </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
                     <asp:UpdatePanel ID="UpdatePanel8" runat="server">
                         <ContentTemplate>
                         <div id="div-edit-bttn-encuesta">
@@ -213,11 +210,14 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
                     </div>
-                <asp:UpdatePanel ID="UpdatePanel9" runat="server">
-                    <ContentTemplate>
-                        <asp:Panel ID="Panel1" runat="server"></asp:Panel>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
+                    <asp:UpdatePanel ID="UpdatePanel18" runat="server">
+                        <ContentTemplate>
+                            <asp:Panel ID="Panel1" runat="server"></asp:Panel>
+                        </ContentTemplate>
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger  ControlID="Button3"/>
+                        </Triggers>
+                    </asp:UpdatePanel>
                 </div>
             </div>
 

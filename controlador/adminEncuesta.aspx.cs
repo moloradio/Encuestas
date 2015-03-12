@@ -10,6 +10,8 @@ public partial class vista_adminEncuesta : System.Web.UI.Page
     private Encuestas encuesta;
     private AEncuestas aencuesta;
     private MostrarDatos datos;
+    private List<Preguntas> preguntas;
+
     private String nomEncuesta;
 
     private String sPregunta;
@@ -17,11 +19,9 @@ public partial class vista_adminEncuesta : System.Web.UI.Page
     private String sRespuesta;
 
     private HiddenField hIdPregunta;
-    private Button bttnEditarPregunta;
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
         datos = new MostrarDatos();
         List<Agencia> agencias = datos.mostrarAgencias();
         for (int i = 0; i < agencias.Count; i++)
@@ -42,26 +42,54 @@ public partial class vista_adminEncuesta : System.Web.UI.Page
             DropDownList2.Items.Add(new ListItem(encuesta.Nombre));
             DropDownList4.Items.Add(new ListItem(encuesta.Nombre));
         }
-        botonModificar();
+        List<TPregunta> tpreguntas = datos.getTPreguntas();
+        for (int i = 0; i < tpreguntas.Count; i++)
+        {
+            TPregunta tpregunta = tpreguntas.ElementAt(i);
+            DropDownList5.Items.Add(new ListItem(tpregunta.Nombre));
+            DropDownList8.Items.Add(new ListItem(tpregunta.Nombre));
+        }
     }
     protected void Button1_Click1(object sender, EventArgs e)
     {
         encuesta = new Encuestas();
         nomEncuesta = TextBox1.Text;
+        String idAgencia = DropDownList3.SelectedItem.Text;
+        String idTEncuesta = DropDownList1.SelectedItem.Text;
 
         encuesta.Nombre = nomEncuesta;
+        encuesta.Descripcion = TextBoxDescripcionNEncuesta.Text;
         aencuesta = new AEncuestas(encuesta);
-        aencuesta.altaNomEncuesta();
+        aencuesta.altaNomEncuesta(idAgencia, idTEncuesta);
 
         Session["idEncuesta"] = aencuesta.getIdEncuesta();
     }
 
-    public void botonModificar() {
-        bttnEditarPregunta = new Button();
+    public Button botonModificar(int i) {
+        Button bttnEditarPregunta = new Button();
+        bttnEditarPregunta.ID = "bttn_" + i;
         bttnEditarPregunta.Text = "Modificar";
         bttnEditarPregunta.CssClass = "btn btn-info bttn-modif-pregunta";
-        bttnEditarPregunta.Click += new EventHandler(this.bttnModificarPregunta);
+        bttnEditarPregunta.Click += new EventHandler(bttnModificarPregunta);
         bttnEditarPregunta.OnClientClick = "mostrarEdicionPreguntas()";
+        return bttnEditarPregunta;
+    }
+
+    protected override void OnInit(EventArgs e)
+    {
+        
+    }
+
+    protected override void OnPreLoad(EventArgs e)
+    {
+        base.OnPreLoad(e);
+        if (IsPostBack)
+        {
+            if (Session["idEncuesta_modif"] != null)
+            {
+
+            }
+        }
     }
 
     protected void Button3_Click(object sender, EventArgs e)
@@ -93,37 +121,30 @@ public partial class vista_adminEncuesta : System.Web.UI.Page
                 tEncuesta = DropDownList7.SelectedItem.Text;
             }
         }
-
-        Button bttnEditarPregunta = new Button();
-        bttnEditarPregunta.Text = "Modificar";
-        bttnEditarPregunta.CssClass = "btn btn-info bttn-modif-pregunta";
-        bttnEditarPregunta.Click += bttnBorrarPregunta;
-
-       // bttnEditarPregunta.OnClientClick = "mostrarEdicionPreguntas()";
-
+        
         preguntas = datos.mostrarPreguntasDeEncuesta(nomEncuesta);
-        Panel1.Controls.Add(bttnEditarPregunta);
-        Panel1.Controls.Add(new LiteralControl( "<div id='div-modificacion-preguntas'>"));
+        Panel1.Controls.Add(new LiteralControl("<div id='div-modificacion-preguntas'>"));
 
-        for(int i=0; i<preguntas.Count; i++){
+        for (int i = 0; i < preguntas.Count; i++)
+        {
             pregunta = preguntas.ElementAt(i);
             hIdPregunta = new HiddenField();
-            hIdPregunta.Value = pregunta.IdPreguntas+"";
+            hIdPregunta.Value = pregunta.IdPreguntas + "";
             hIdPregunta.ID = "hiddenIdPreguntas";
             Panel1.Controls.Add(new LiteralControl("<div class='div-preguntas'>"
                         + "<div class='div-lbl-pregunta'>"
-                        + "   <Label ID='lbl_pregunta' runat='server' Text='Label' class='lbl-modif-pregunta'>"+ pregunta.Pregunta +"</asp:Label>"
+                        + "   <Label ID='lbl_pregunta' runat='server' Text='Label' class='lbl-modif-pregunta'>" + pregunta.Pregunta + "</asp:Label>"
                         + "</div>"
                         + "<div class='div-bttn-modif'>"));
-            Panel1.Controls.Add(bttnEditarPregunta);
+            Panel1.Controls.Add(botonModificar(i));
             Panel1.Controls.Add(hIdPregunta);
-                        //"   <input type='button' ID='Button5' value='Modificar' class='btn btn-info bttn-modif-pregunta' onclick='mostrarEdicionPreguntas()' />"
+            //"   <input type='button' ID='Button5' value='Modificar' class='btn btn-info bttn-modif-pregunta' onclick='mostrarEdicionPreguntas()' />"
             Panel1.Controls.Add(new LiteralControl("</div>"
                         + "<div class='div-bttn-erase'>"
-                        + "   <input type='button' ID='Button6' runat='server' value='Borrar' class='btn btn-danger bttn-erase-pregunta' OnClick='bttnBorrarPregunta' />" 
+                        + "   <input type='button' ID='Button6' runat='server' value='Borrar' class='btn btn-danger bttn-erase-pregunta' OnClick='bttnBorrarPregunta' />"
                         + "</div>"
                     + "</div>"));
-            
+
         }
         Panel1.Controls.Add(new LiteralControl("</div>"));
     }
@@ -183,13 +204,22 @@ public partial class vista_adminEncuesta : System.Web.UI.Page
     protected void Button5_Click(object sender, EventArgs e)
     {
         sPregunta = textarea_pregunta.Text;
-        sTPregunta = DropDownList2.SelectedValue;
+        sTPregunta = (DropDownList5.SelectedIndex + 1)+"";
         sRespuesta = getRespuestaPregunta(ta_opciones_respuestas.Text);
 
-        guardarPregunta(Panel2, Session["idEncuesta"], "alta");
+        guardarPregunta(Panel2, Session["idEncuesta"], "alta", sPregunta, sTPregunta, sRespuesta);
     }
 
-    private void guardarPregunta(Panel panel, Object sesion, String tipoAlta) {
+    protected void Button10_Click(object sender, EventArgs e)
+    {
+        sPregunta = textarea_pregunta2.Text;
+        sTPregunta = (DropDownList8.SelectedIndex + 1)+"";
+        sRespuesta = getRespuestaPregunta(ta_opciones_respuestas2.Text);
+
+        guardarPregunta(Panel1, Session["idEncuesta_modif"], "modif", sPregunta, sTPregunta, sRespuesta);
+    }
+
+    private void guardarPregunta(Panel panel, Object sesion, String tipoAlta, String preg, String tPreg, String sResp) {
         if (sesion != null)
         {
             Preguntas pregunta = new Preguntas();
@@ -197,16 +227,16 @@ public partial class vista_adminEncuesta : System.Web.UI.Page
 
             pregunta.IdEncuestas = new Encuestas((int)sesion);
             //pregunta.IdEncuestas = new Encuestas(1);
-            pregunta.IdTPregunta = new TPregunta(1);
+            pregunta.IdTPregunta = new TPregunta(Convert.ToInt32(tPreg));
             pregunta.NumPregunta = 1;
-            pregunta.Pregunta = sPregunta;
+            pregunta.Pregunta = preg;
             pregunta.Activo = 's';
 
             AEncuestas aencuesta = new AEncuestas(pregunta);
             aencuesta.altaPregunta();
 
             String[] resp;
-            resp = getArrayRespuestas(sRespuesta).ToArray();
+            resp = getArrayRespuestas(sResp).ToArray();
             int cont = 0;
 
             respuesta.Activo = 's';
@@ -291,12 +321,4 @@ public partial class vista_adminEncuesta : System.Web.UI.Page
         return respuestas;
     }
 
-    protected void Button10_Click(object sender, EventArgs e)
-    {
-        sPregunta = textarea_pregunta2.Text;
-        sTPregunta = DropDownList2.SelectedValue;
-        sRespuesta = getRespuestaPregunta(ta_opciones_respuestas2.Text);
-
-        guardarPregunta(Panel1, Session["idEncuesta_modif"],"modif");
-    }
 }

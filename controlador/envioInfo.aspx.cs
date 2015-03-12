@@ -25,7 +25,8 @@ public partial class vista_envioInfo : System.Web.UI.Page
             cliente = clientes.ElementAt(i);
             htmlDiv += "<div class='div_content_opc_cte'>";
             htmlDiv += "    <div class='div_opc_cte div_opc_num'><label class='lbl-nom-cte'> "+ cliente.Nombre +" "+cliente.AMaterno+" "+cliente.APaterno+"</label></div>";
-            //htmlDiv += "    <div class='div_opc_cte div_opc_tel'><label class='lbl-nom-tel'> " + cliente.Tel_celular + "</label></div>";
+            htmlDiv += "    <div class='div_opc_cte div_opc_tel'><label class='lbl-nom-tel'> " + cliente.Tel_celular + "</label></div>";
+            htmlDiv += "    <div class='div_opc_cte div_opc_email'><label class='lbl-nom-email'> " + cliente.Email + "</label></div>";
             htmlDiv += "    <div class='div_opc_cte div_opc_sms'><input class='bttn-info' id='input_sms' type='button' value='Enviar SMS' onClick='mostrarEnviarSms()' /></div>";
             htmlDiv += "    <div class='div_opc_cte div_opc_mail'><input class='bttn-info id='input_email' type='button' value='Enviar e-mail' onClick='mostrarEnviarEmail()' /></div>";
             htmlDiv += "</div>";

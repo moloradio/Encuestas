@@ -29,7 +29,7 @@ public class Test : System.Web.Services.WebService {
         cn = con.getConexion();
     }
 
-    [WebMethod]
+   // [WebMethod]
     public int getNumPreguntasDeEncuesta(int idEncuesta) {
         int numPreguntas = 0;
         try

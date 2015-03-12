@@ -23,7 +23,7 @@ function ocultarEdicionPreguntas() {
 }
 
 function mostrarEdicionPreguntas() {
-    $("#div_modificar_preguntas").css("display", "block");
+    $("#div_modif icar_preguntas").css("display", "block");
 }
 
 function mostrarEnviarEmail() {

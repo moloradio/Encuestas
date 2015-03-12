@@ -117,7 +117,7 @@ public class MostrarDatos
                     encuesta = new Encuestas();
                     encuesta.IdEncuesta = (int)reader[0];
                     encuesta.Nombre = (String)reader[1];
-                    //encuesta.Descripcion = (String)reader[2];
+                    encuesta.Descripcion = (String)reader[2];
                     encuestas.Add(encuesta);
                 }
             }
@@ -278,5 +278,41 @@ public class MostrarDatos
         }
 
         return clientes;
+    }
+
+    public List<TPregunta> getTPreguntas() {
+
+        List<TPregunta> tpreguntas = new List<TPregunta>();
+        TPregunta tpregunta = null;
+
+        String cadenaSql = "SELECT * FROM TPregunta";
+        try
+        {
+            sqlcomm = new SqlCommand(cadenaSql, cn);
+            cn.Open();
+            try
+            {
+                reader = sqlcomm.ExecuteReader();
+                while (reader.Read())
+                {
+                    tpregunta = new TPregunta();
+                    tpregunta.IdTPregunta = (int)reader[0];
+                    tpregunta.Nombre = (String)reader[1];
+                    tpregunta.Descripcion = (String)reader[2]; 
+                    tpreguntas.Add(tpregunta);
+                }
+            }
+            catch (SqlException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            cn.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+
+        return tpreguntas;
     }
 }
